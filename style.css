@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Baskervville&display=swap');
+* {
+    margin: 0px;
+    padding: 0px;
+}
+body {
+    background: rgb(54,112,199);
+    background: linear-gradient(90deg, rgba(54,112,199,1) 0%, rgba(71,164,221,1) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.contenedor {
+    position: relative;
+    max-width: 300px;
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    font-family:'Baskervville', serif;
+    background-color: #C0D5E4;
+    padding: 2rem 4rem;
+}
+
+.nueva-tarea {
+    display: flex;
+    float: left;
+    margin-top: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+.nueva-tarea #nombre-tarea{
+    flex-grow: 1;
+    float: left;
+    background-color: transparent;
+    border: none;
+    border-color: transparent;
+    outline: none;
+    border-bottom: 1px solid black;
+}
+
+.tarea {
+    margin-top: 0.75rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.nombre-tarea {
+    margin-right: 1rem;
+}
+
+.tarea button{
+    border: none;
+    background-color: transparent;
+    transition: transform 300ms;
+}
+
+.tarea button:hover,
+.tarea button:focus {
+    transform: scale(1.1);
+}
+
+.tick {
+    width: 1.5rem;
+}
+
+#numero-tareas-pendientes {
+    color:white;
+    position:absolute;
+    bottom: -2rem;
+}
