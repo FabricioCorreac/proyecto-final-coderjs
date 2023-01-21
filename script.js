@@ -53,8 +53,8 @@ function actualizarTareas() {
         tarea.appendChild(nombreTarea)
 
         const boton = document.createElement("button")
-        boton.addEventListener("click", e => {
-            tareas.splice(e.target.parentElement.dataset.indice, 1)
+        boton.addEventListener("click", function(e) {
+            tareas.splice(this.parentElement.dataset.indice, 1)
             actualizarTareas()
         })
 
