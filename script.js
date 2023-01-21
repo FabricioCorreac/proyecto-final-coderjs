@@ -11,9 +11,9 @@
 //     else return mcd(b, a % b)
 // }
 
-//let num1 = pedirEnteroPositivo()
-//let num2 = pedirEnteroPositivo()
-//alert("El mínimo común divisor entre " + num1 + " y " + num2  + " es: " + mcd(num1,num2))
+// let num1 = pedirEnteroPositivo()
+// let num2 = pedirEnteroPositivo()
+// alert("El mínimo común divisor entre " + num1 + " y " + num2  + " es: " + mcd(num1,num2))
 
 const formularioCrearTarea = document.getElementById("crear-tarea")
 const inputNuevaTarea = document.getElementById("nombre-nueva-tarea")
@@ -42,7 +42,7 @@ function agregarTarea(nombre) {
 function actualizarTareas() {
     contenedorTareasPendientes.innerHTML = ""
     contadorPendientes.innerText = "Número de tareas pendientes: " + tareas.length
-    tareas.reverse().forEach((elemento, indice) => { //Usamos reverse para que las tareas más nuevas aparezcan más arriba
+    tareas.slice().reverse().forEach((elemento, indice) => { //Usamos reverse para que las tareas más nuevas aparezcan más arriba
         const tarea = document.createElement("div")
         tarea.classList.add("tarea")
         tarea.dataset["indice"] = indice
