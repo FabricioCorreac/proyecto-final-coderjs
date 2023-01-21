@@ -42,7 +42,7 @@ function agregarTarea(nombre) {
 function actualizarTareas() {
     contenedorTareasPendientes.innerHTML = ""
     contadorPendientes.innerText = "Número de tareas pendientes: " + tareas.length
-    tareas.reverse().forEach((elemento, indice) => { //Usamos reverse para que las tareas más nuevas aparezcan más arriba
+    tareas.slice().reverse().forEach((elemento, indice) => { //Usamos reverse para que las tareas más nuevas aparezcan más arriba
         const tarea = document.createElement("div")
         tarea.classList.add("tarea")
         tarea.dataset["indice"] = indice
