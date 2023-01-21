@@ -11,9 +11,9 @@
 //     else return mcd(b, a % b)
 // }
 
-let num1 = pedirEnteroPositivo()
-let num2 = pedirEnteroPositivo()
-alert("El mínimo común divisor entre " + num1 + " y " + num2  + " es: " + mcd(num1,num2))
+//let num1 = pedirEnteroPositivo()
+//let num2 = pedirEnteroPositivo()
+//alert("El mínimo común divisor entre " + num1 + " y " + num2  + " es: " + mcd(num1,num2))
 
 const formularioCrearTarea = document.getElementById("crear-tarea")
 const inputNuevaTarea = document.getElementById("nombre-tarea")
