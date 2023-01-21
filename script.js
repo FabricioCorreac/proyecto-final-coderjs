@@ -40,9 +40,9 @@ function agregarTarea(nombre) {
 }
 
 function actualizarTareas() {
-    vaciarElemento(contenedorTareasPendientes)
+    contenedorTareasPendientes.innerHTML = ""
     contadorPendientes.innerText = "Número de tareas pendientes: " + tareas.length
-    tareas.forEach((elemento, indice) => {
+    tareas.reverse().forEach((elemento, indice) => { //Usamos reverse para que las tareas más nuevas aparezcan más arriba
         const tarea = document.createElement("div")
         tarea.classList.add("tarea")
         tarea.dataset["indice"] = indice
@@ -53,7 +53,7 @@ function actualizarTareas() {
         tarea.appendChild(nombreTarea)
 
         const boton = document.createElement("button")
-        boton.addEventListener("click", function(e) {
+        boton.addEventListener("click", function(e) {  //En este caso no usamos => ya que usar this nos retornaría el objeto window y no el botón
             tareas.splice(this.parentElement.dataset.indice, 1)
             actualizarTareas()
         })
@@ -67,14 +67,3 @@ function actualizarTareas() {
 
         contenedorTareasPendientes.appendChild(tarea)})
 }
-
-function borrarTarea(tarea) {
-    
-}
-
-function vaciarElemento(elemento) {
-    while (elemento.firstChild) {
-        elemento.removeChild(elemento.firstChild)
-    }
-}
-
