@@ -2,13 +2,16 @@ const formularioCrearTarea = document.getElementById("crear-tarea")
 const inputNuevaTarea = document.getElementById("nombre-nueva-tarea")
 const contenedorTareasPendientes = document.getElementById("tareas-pendientes")
 const contadorPendientes = document.getElementById("numero-tareas-pendientes")
-const tareas = []
+
+const tareas = JSON.parse(localStorage.getItem("tareas")) || []
 
 class Tarea {
     constructor (nombre) {
         this.nombre = nombre
     }
 }
+
+actualizarTareas()
 
 formularioCrearTarea.addEventListener("submit", event => {
     event.preventDefault()
@@ -23,6 +26,7 @@ function agregarTarea(nombre) {
 }
 
 function actualizarTareas() {
+    guardarTareas()
     contenedorTareasPendientes.innerHTML = ""
     contadorPendientes.innerText = "Número de tareas pendientes: " + tareas.length
     tareas.forEach((elemento, indice) => {
@@ -49,4 +53,8 @@ function actualizarTareas() {
         tarea.appendChild(boton)
 
         contenedorTareasPendientes.prepend(tarea)})
+}
+
+function guardarTareas() {
+    localStorage.setItem("tareas", JSON.stringify(tareas))
 }
