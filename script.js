@@ -1,20 +1,3 @@
-// function pedirEnteroPositivo() {
-//     let num = Number(prompt('Ingrese un entero mayor a 0'))
-//     while (!Number.isInteger(num) || num == 0) {
-//         num = Number(prompt('Entrada inválida. Debe ingresar un entero mayor a 0'))
-//     }
-//     return num
-// }
-
-// function mcd(a, b) { //Calculamos el máximo comun divisor usando el algoritmo de Euclides.
-//     if (b == 0) return a
-//     else return mcd(b, a % b)
-// }
-
-// let num1 = pedirEnteroPositivo()
-// let num2 = pedirEnteroPositivo()
-// alert("El mínimo común divisor entre " + num1 + " y " + num2  + " es: " + mcd(num1,num2))
-
 const formularioCrearTarea = document.getElementById("crear-tarea")
 const inputNuevaTarea = document.getElementById("nombre-nueva-tarea")
 const contenedorTareasPendientes = document.getElementById("tareas-pendientes")
