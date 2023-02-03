@@ -7,14 +7,23 @@
     font-family:'Forum', serif;
 }
 
+html {
+    min-height: 100%;
+    margin: 0;
+}
+
 body {
+    margin: 0;
+    min-height: 100%;
     padding-bottom: 3rem;
-    min-height: 100vh;
-    background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);}
+    background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+}
 
 .contenedor {
     display: grid;
+    place-items: start center;
     grid-template-columns: 2fr 4fr;
+    position: relative;
 }
 
 .contenedor-tareas {
@@ -105,12 +114,10 @@ body {
 }
 
 .pomodoro {
+    position: fixed;
+    top: 12rem;
+    right: 12rem;
     color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
 }
 
 .saltar {
