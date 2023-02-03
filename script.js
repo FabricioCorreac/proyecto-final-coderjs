@@ -3,8 +3,12 @@ const inputNuevaTarea = document.getElementById("nombre-nueva-tarea")
 const contenedorTareasPendientes = document.getElementById("tareas-pendientes")
 const contadorPendientes = document.getElementById("numero-tareas-pendientes")
 const plantillaTarea = document.getElementById("plantilla-tarea")
+const tiempoRestante = document.getElementById("tiempo-restante")
+const botonEmpezar_pausarPomodoro = document.getElementById("empezar-pausar")
+const botonSaltar = document.getElementById("boton-saltar")
 
 const tareas = JSON.parse(localStorage.getItem("tareas")) || []
+
 
 class Tarea {
     constructor (nombre) {
@@ -20,6 +24,29 @@ formularioCrearTarea.addEventListener("submit", event => {
     agregarTarea(inputNuevaTarea.value)
     inputNuevaTarea.value = ""
 })
+
+let temporizador = {
+    etapa: "trabajo",
+    activo: false, 
+    momentoActivacion: new Date().getTime(),
+    tiempoRestante: 1500000 //25 minutos
+}
+
+let idIntervalo
+botonEmpezar_pausarPomodoro.addEventListener("click", e => {
+    temporizador.activo = !temporizador.activo
+    temporizador.momentoActivacion = new Date().getTime()
+    if (temporizador.activo) {
+        idIntervalo = setInterval(actualizarTemporizador, 1000)
+        botonEmpezar_pausarPomodoro.innerText = "Pausar"         
+    }
+    else {
+        clearInterval(idIntervalo)
+        botonEmpezar_pausarPomodoro.innerText = "Empezar"
+    }
+})
+
+botonSaltar.addEventListener("click", saltarPomodoro)
 
 function agregarTarea(nombre) {
     tareas.push(new Tarea(nombre))
@@ -52,4 +79,30 @@ function actualizarTareas() {
 
 function guardarTareas() {
     localStorage.setItem("tareas", JSON.stringify(tareas))
+}
+
+function actualizarTemporizador() {
+    const UN_SEGUNDO = 1000
+    if (temporizador.tiempoRestante > UN_SEGUNDO) {
+        temporizador.tiempoRestante -= 1000
+    }
+    else {saltarPomodoro()}
+
+    tiempoRestante.innerText = String(new Date(temporizador.tiempoRestante).getMinutes()) + ":" + new Date(temporizador.tiempoRestante).getSeconds().toLocaleString('en-US', {minimumIntegerDigits: 2,useGrouping: false})
+}
+
+function saltarPomodoro() {
+    temporizador.activo = false
+    clearInterval(idIntervalo)
+    botonEmpezar_pausarPomodoro.innerText = "Empezar"
+
+    if (temporizador.etapa == "break") {
+        temporizador.etapa = "trabajo"
+        temporizador.tiempoRestante = 1500000
+    }
+    else {
+        temporizador.etapa = "break"
+        temporizador.tiempoRestante = 300000
+    }
+    tiempoRestante.innerText = String(new Date(temporizador.tiempoRestante).getMinutes()) + ":" + new Date(temporizador.tiempoRestante).getSeconds().toLocaleString('en-US', {minimumIntegerDigits: 2,useGrouping: false})
 }
