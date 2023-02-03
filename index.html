@@ -9,13 +9,25 @@
     </head>
     <body>
         <div class="contenedor">
-            <h1 class="titulo">TO DO LIST</h1>
-            <form class="nueva-tarea" id="crear-tarea" autocomplete = "off">
-                <input id="nombre-nueva-tarea" required pattern=".*\S+.*" type="text" placeholder="nueva tarea">
-                <input type="submit" value="+">
-            </form>
-            <div id="tareas-pendientes" class="tareas-pendientes"></div>
-            <p id="numero-tareas-pendientes">Número de tareas pendientes: 0</p>
+            <div class="contenedor-tareas">
+                <h1 class="titulo">TO DO LIST</h1>
+                <form class="nueva-tarea" id="crear-tarea" autocomplete = "off">
+                    <input id="nombre-nueva-tarea" required pattern=".*\S+.*" type="text" placeholder="nueva tarea">
+                    <input type="submit" value="+">
+                </form>
+                <div id="tareas-pendientes" class="tareas-pendientes"></div>
+                <p id="numero-tareas-pendientes">Número de tareas pendientes: 0</p>
+            </div>
+            <div class="pomodoro">
+                <p class="titulo-pomodoro">Tiempo restante</p>
+                <p id="tiempo-restante">25:00</p>
+                <div class="botones-pomodoro">
+                    <button id="empezar-pausar">Empezar</button>
+                    <button id="boton-saltar">
+                        <img class="saltar"src="./skip.svg" alt="">
+                    </button>
+                </div>
+            </div>
         </div>
         <template id="plantilla-tarea">
             <div class="tarea">

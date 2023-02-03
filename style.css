@@ -1,31 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Baskervville&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Forum&display=swap');
 * {
     margin: 0px;
     padding: 0px;
-}
-body {
-    background: rgb(54,112,199);
-    background: linear-gradient(90deg, rgba(54,112,199,1) 0%, rgba(71,164,221,1) 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-family:'Forum', serif;
 }
 
+body {
+    padding-bottom: 3rem;
+    min-height: 100vh;
+    background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);}
 
 .contenedor {
+    display: grid;
+    grid-template-columns: 2fr 4fr;
+}
+
+.contenedor-tareas {
     position: relative;
-    max-width: 300px;
+    max-width: 40rem;
     margin-top: 5rem;
+    margin-left: 5rem;
     display: flex;
     flex-direction: column;
     font-family:'Baskervville', serif;
-    background-color: #C0D5E4;
+    background-color: white;
     padding: 2rem 4rem;
     border-radius: 30px;
 }
 
 .titulo {
     text-align: center;
+    font-family:'Poppins', serif;
+    font-size: 2.2rem;
 }
 .nueva-tarea {
     display: flex;
@@ -46,6 +54,8 @@ body {
 }
 
 #nombre-nueva-tarea{
+    font-size: 1.2rem;
+
     flex-grow: 1;
     float: left;
     padding: 5px;
@@ -66,6 +76,7 @@ body {
 
 .nombre-tarea {
     margin-right: 1rem;
+    font-size: 1.3rem;
 }
 
 .tarea button{
@@ -84,7 +95,54 @@ body {
 }
 
 #numero-tareas-pendientes {
-    color:white;
+    font-size: 1.2rem;
+    color:rgb(34, 104, 255);
     position:absolute;
     bottom: -2rem;
 }
+
+.pomodoro {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.saltar {
+    aspect-ratio: 1;
+    width: 4rem;
+}
+
+.titulo-pomodoro {
+    font-size: 4rem;
+    font-family: 'Poppins';
+    font-weight: bold;
+}
+
+#tiempo-restante {
+    font-size: 7rem;
+    font-family: 'Poppins';
+}
+
+#boton-saltar {
+    margin-left: 1rem;
+    background: white;
+    border: none;
+    border-radius: 20px;
+    padding: 1rem;
+    position: relative;
+    top: 0.5rem;
+}
+
+#empezar-pausar {
+    font-family: 'Poppins', sans-serif;
+    font-size: 4rem;
+    color: rgb(34, 104, 255);
+    border-radius: 20px;
+    padding: 0.2rem 0.5rem;
+    border: none;
+    background-color: white;
+}
+
