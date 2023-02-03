@@ -99,6 +99,9 @@ body {
     color:rgb(34, 104, 255);
     position:absolute;
     bottom: -2rem;
+    left: 0px;
+    right: 0px;
+    text-align: center;
 }
 
 .pomodoro {
