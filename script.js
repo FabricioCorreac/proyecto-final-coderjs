@@ -107,5 +107,5 @@ function saltarPomodoro() {
         temporizador.etapa = "break"
         temporizador.tiempoRestante = 300000
     }
-    tiempoRestante.innerText = String(new Date(temporizador.tiempoRestante).getMinutes()) + ":" + new Date(temporizador.tiempoRestante).getSeconds().toLocaleString('en-US', {minimumIntegerDigits: 2,useGrouping: false})
+    tiempoRestante.innerText = temporizador.minutosRestantes() + ":" + temporizador.segundosRestantes()
 }
