@@ -28,14 +28,15 @@ formularioCrearTarea.addEventListener("submit", event => {
 let temporizador = {
     etapa: "trabajo",
     activo: false, 
-    momentoActivacion: new Date().getTime(),
-    tiempoRestante: 1500000 //25 minutos
+    tiempoRestante: 1500000, //25 minutos
+    minutosRestantes: function () {return String(new Date(this.tiempoRestante).getMinutes())},
+    segundosRestantes: function () {return new Date(this.tiempoRestante).getSeconds().toLocaleString('en-US', {minimumIntegerDigits: 2,useGrouping: false})},
+
 }
 
 let idIntervalo
 botonEmpezar_pausarPomodoro.addEventListener("click", e => {
     temporizador.activo = !temporizador.activo
-    temporizador.momentoActivacion = new Date().getTime()
     if (temporizador.activo) {
         idIntervalo = setInterval(actualizarTemporizador, 1000)
         botonEmpezar_pausarPomodoro.innerText = "Pausar"         
@@ -88,8 +89,10 @@ function actualizarTemporizador() {
     }
     else {saltarPomodoro()}
 
-    tiempoRestante.innerText = String(new Date(temporizador.tiempoRestante).getMinutes()) + ":" + new Date(temporizador.tiempoRestante).getSeconds().toLocaleString('en-US', {minimumIntegerDigits: 2,useGrouping: false})
+    tiempoRestante.innerText = temporizador.minutosRestantes() + ":" + temporizador.segundosRestantes()
 }
+
+
 
 function saltarPomodoro() {
     temporizador.activo = false
