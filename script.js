@@ -17,7 +17,7 @@ class Tarea {
     }
 }
 
-let fotoGatito = fetch("https://api.thecatapi.com/v1/images/search")
+fetch("https://api.thecatapi.com/v1/images/search")
     .then((resp) => resp.json())
     .then((json) => preloadImage(json[0].url));
 
@@ -81,7 +81,7 @@ function actualizarTareas() {
             tareas.splice(tarea.dataset["indice"], 1);
             actualizarTareas();
         });
-
+        
         contenedorTareasPendientes.prepend(tarea);
     });
 }
@@ -111,7 +111,7 @@ function cambiarEtapa() {
     if (temporizador.etapa == "break") {
         temporizador.etapa = "trabajo";
         temporizador.tiempoRestante = 1500;
-        fotoGatito = fetch("https://api.thecatapi.com/v1/images/search")
+        fetch("https://api.thecatapi.com/v1/images/search")
             .then((resp) => resp.json())
             .then((json) => preloadImage(json[0].url));
     } else {
@@ -120,7 +120,7 @@ function cambiarEtapa() {
         Swal.fire({
             title: "A descansar!",
             text: "Te dejamos un gatito",
-            imageUrl: cache.querySelector("img").src,
+            imageUrl: cache.src,
         });
     }
     tiempoRestante.innerText =
@@ -129,10 +129,6 @@ function cambiarEtapa() {
         temporizador.segundosRestantes();
 }
 
-function numeroRandom(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
 function preloadImage(url) {
-    cache.getElementsByTagName("img")[0].src = url;
+    cache.src = url;
 }

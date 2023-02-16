@@ -89,12 +89,18 @@ body {
 .tarea button{
     border: none;
     background-color: transparent;
+}
+
+button, input[type="submit"] {
     transition: transform 300ms;
 }
 
-.tarea button:hover,
-.tarea button:focus {
+button:hover,
+button:focus,
+input[type="submit"]:hover,
+input[type="submit"]:focus {
     transform: scale(1.1);
+    cursor: pointer;
 }
 
 .tick {
@@ -155,8 +161,14 @@ body {
     position: absolute;
     z-index: -1000;
     opacity: 0;
+    height: 0px;
 }
 
-#cache img {
-    position: absolute;
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }

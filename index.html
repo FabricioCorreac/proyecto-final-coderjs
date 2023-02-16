@@ -10,15 +10,15 @@
     <body>
         <div class="contenedor">
             <div class="contenedor-tareas">
-                <h1 class="titulo">TO DO LIST</h1>
+                <h1 class="titulo unselectable">TO DO LIST</h1>
                 <form class="nueva-tarea" id="crear-tarea" autocomplete = "off">
                     <input id="nombre-nueva-tarea" required pattern=".*\S+.*" type="text" placeholder="nueva tarea">
                     <input type="submit" value="+">
                 </form>
                 <div id="tareas-pendientes" class="tareas-pendientes"></div>
-                <p id="numero-tareas-pendientes">Número de tareas pendientes: 0</p>
+                <p id="numero-tareas-pendientes" class="unselectable">Número de tareas pendientes: 0</p>
             </div>
-            <div class="pomodoro">
+            <div class="pomodoro unselectable">
                 <p class="titulo-pomodoro">Tiempo restante</p>
                 <p id="tiempo-restante">25:00</p>
                 <div class="botones-pomodoro">
@@ -33,13 +33,11 @@
             <div class="tarea">
                 <p class="nombre-tarea"></p>
                 <button>
-                    <img class="tick" src="./tick.svg">
+                    <img class="tick unselectable" draggable="false" src="./tick.svg">
                 </button>
             </div>
         </template>
-        <div id="cache">
-            <img>
-        </div>
+        <img id="cache">
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="script.js"></script>
     </body>
