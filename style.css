@@ -151,3 +151,12 @@ body {
     background-color: white;
 }
 
+#cache {
+    position: absolute;
+    z-index: -1000;
+    opacity: 0;
+}
+
+#cache img {
+    position: absolute;
+}
