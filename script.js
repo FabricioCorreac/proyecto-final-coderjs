@@ -28,9 +28,9 @@ formularioCrearTarea.addEventListener("submit", event => {
 let temporizador = {
     etapa: "trabajo",
     activo: false, 
-    tiempoRestante: 1500000, //25 minutos
-    minutosRestantes: function () {return String(new Date(this.tiempoRestante).getMinutes())},
-    segundosRestantes: function () {return new Date(this.tiempoRestante).getSeconds().toLocaleString('en-US', {minimumIntegerDigits: 2,useGrouping: false})},
+    tiempoRestante: 1500, //25 minutos
+    minutosRestantes: function () {return String(Math.floor(this.tiempoRestante/60))},
+    segundosRestantes: function () {return (this.tiempoRestante%60).toLocaleString('en-US', {minimumIntegerDigits: 2,useGrouping: false})},
 
 }
 
@@ -47,7 +47,7 @@ botonEmpezar_pausarPomodoro.addEventListener("click", e => {
     }
 })
 
-botonSaltar.addEventListener("click", saltarPomodoro)
+botonSaltar.addEventListener("click", cambiarEtapa)
 
 function agregarTarea(nombre) {
     tareas.push(new Tarea(nombre))
@@ -83,29 +83,32 @@ function guardarTareas() {
 }
 
 function actualizarTemporizador() {
-    const UN_SEGUNDO = 1000
-    if (temporizador.tiempoRestante > UN_SEGUNDO) {
-        temporizador.tiempoRestante -= 1000
+    if (temporizador.tiempoRestante > 1) {
+        temporizador.tiempoRestante -= 1
     }
-    else {saltarPomodoro()}
+    else {cambiarEtapa()}
 
     tiempoRestante.innerText = temporizador.minutosRestantes() + ":" + temporizador.segundosRestantes()
 }
 
 
 
-function saltarPomodoro() {
+function cambiarEtapa() {
     temporizador.activo = false
     clearInterval(idIntervalo)
     botonEmpezar_pausarPomodoro.innerText = "Empezar"
 
     if (temporizador.etapa == "break") {
         temporizador.etapa = "trabajo"
-        temporizador.tiempoRestante = 1500000
+        temporizador.tiempoRestante = 1500
     }
     else {
         temporizador.etapa = "break"
-        temporizador.tiempoRestante = 300000
+        temporizador.tiempoRestante = 300
     }
     tiempoRestante.innerText = temporizador.minutosRestantes() + ":" + temporizador.segundosRestantes()
+}
+
+function numeroRandom(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
