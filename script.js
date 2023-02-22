@@ -10,24 +10,18 @@ const cache = document.getElementById("cache");
 
 const tareas = JSON.parse(localStorage.getItem("tareas")) || [];
 
-class Tarea {
-    constructor(nombre) {
-        this.nombre = nombre;
-        this.completada = false;
-    }
-}
-
-fetch("https://api.thecatapi.com/v1/images/search")
-    .then((resp) => resp.json())
-    .then((json) => preloadImage(json[0].url));
-
-actualizarTareas();
+renderizarTareas();
 
 formularioCrearTarea.addEventListener("submit", (event) => {
     event.preventDefault();
     agregarTarea(inputNuevaTarea.value);
     inputNuevaTarea.value = "";
 });
+
+//deja cargada la foto en caso de que se salte rápidamente el pomodoro
+fetch("https://api.thecatapi.com/v1/images/search")
+    .then((resp) => resp.json())
+    .then((json) => preloadImage(json[0].url));
 
 let temporizador = {
     etapa: "trabajo",
@@ -44,8 +38,57 @@ let temporizador = {
     },
 };
 
-let idIntervalo;
 botonEmpezar_pausarPomodoro.addEventListener("click", (e) => {
+    alternarPomodoro();
+});
+
+let idIntervalo;
+
+botonSaltar.addEventListener("click", cambiarEtapa);
+
+class Tarea {
+    constructor(nombre) {
+        this.nombre = nombre;
+        this.completada = false;
+    }
+}
+
+function renderizarTareas() {
+    contenedorTareasPendientes.innerHTML = "";
+    contadorPendientes.innerText =
+        "Número de tareas pendientes: " + tareas.length;
+
+    tareas.forEach((elemento, indice) => {
+        contenedorTareasPendientes.prepend(crearTareaDom(elemento, indice));
+    });
+}
+
+function crearTareaDom(elemento, indice) {
+    const tarea = plantillaTarea.content.firstElementChild.cloneNode(true);
+    tarea.dataset["indice"] = indice;
+
+    const nombreTarea = tarea.querySelector(".nombre-tarea");
+    nombreTarea.innerText = elemento.nombre;
+
+    const boton = tarea.querySelector("button");
+    boton.addEventListener("click", (e) => {
+        tareas.splice(tarea.dataset["indice"], 1);
+        renderizarTareas();
+    });
+    return tarea;
+}
+
+function agregarTarea(nombre) {
+    tareas.push(new Tarea(nombre));
+    guardarTareas();
+    renderizarTareas();
+}
+
+function guardarTareas() {
+    localStorage.setItem("tareas", JSON.stringify(tareas));
+}
+
+function alternarPomodoro() {
     temporizador.activo = !temporizador.activo;
     if (temporizador.activo) {
         idIntervalo = setInterval(actualizarTemporizador, 1000);
@@ -54,40 +97,6 @@ botonEmpezar_pausarPomodoro.addEventListener("click", (e) => {
         clearInterval(idIntervalo);
         botonEmpezar_pausarPomodoro.innerText = "Empezar";
     }
-});
-
-botonSaltar.addEventListener("click", cambiarEtapa);
-
-function agregarTarea(nombre) {
-    tareas.push(new Tarea(nombre));
-    actualizarTareas();
-}
-
-function actualizarTareas() {
-    guardarTareas();
-    contenedorTareasPendientes.innerHTML = "";
-    contadorPendientes.innerText =
-        "Número de tareas pendientes: " + tareas.length;
-
-    tareas.forEach((elemento, indice) => {
-        const tarea = plantillaTarea.content.firstElementChild.cloneNode(true);
-        tarea.dataset["indice"] = indice;
-
-        const nombreTarea = tarea.querySelector(".nombre-tarea");
-        nombreTarea.innerText = elemento.nombre;
-
-        const boton = tarea.querySelector("button");
-        boton.addEventListener("click", (e) => {
-            tareas.splice(tarea.dataset["indice"], 1);
-            actualizarTareas();
-        });
-        
-        contenedorTareasPendientes.prepend(tarea);
-    });
-}
-
-function guardarTareas() {
-    localStorage.setItem("tareas", JSON.stringify(tareas));
 }
 
 function actualizarTemporizador() {
